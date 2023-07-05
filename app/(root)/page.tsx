@@ -1,9 +1,15 @@
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
     return (
-      <p>
+      <div className="p-5">
+        <p>
         Hello Admin Dashbor
-      </p>    
+      </p>   
+        <Button variant="outline">
+            click me
+        </Button>
+      </div> 
     )
   }
   
