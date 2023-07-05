@@ -36,7 +36,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## check authentication user management
 
 clerk.com
-
+https://clerk.com/docs/nextjs/get-started-with-nextjs
 
 ## shadcn/ui
 
