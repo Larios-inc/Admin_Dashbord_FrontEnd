@@ -20,8 +20,6 @@ import { Form,
          FormMessage } from '@/components/ui/form'
 import {Input} from '@/components/ui/input'
 import { AlertModal } from '@/components/modals/alret-modal'
-import { ApiAlert } from '@/components/ui/api-alert'
-import { useOrigin } from '@/hooks/use-origin'
 import ImageUpload from '@/components/ui/image-upload'
 
 const formSchema = z.object({
@@ -39,7 +37,6 @@ const BillboardForm: React.FC<BillboarFormProps> = ({ initialData }) => {
 
     const params = useParams()
     const router = useRouter()
-    const origin = useOrigin()
 
     const [open, setOpen]= useState(false)
     const [loading, setLoading]= useState(false)
@@ -60,12 +57,15 @@ const BillboardForm: React.FC<BillboarFormProps> = ({ initialData }) => {
     const onSubmit = async (data: BillboarFormValues) =>{
         try {
             
+            console.log(data);
+            
+
             setLoading(true)
 
             if( initialData ){
                 await axios.patch(`/api/${params.storeId}/billboards/${params.billboardId}}`, data);
             }else{
-                await axios.post(`/api/${params.storeId}/billboards}`, data); 
+                await axios.post(`/api/${params.storeId}/billboards`, data); 
             }
             router.refresh()
             toast.success(toastMessage)
@@ -150,14 +150,21 @@ const BillboardForm: React.FC<BillboarFormProps> = ({ initialData }) => {
                             <FormItem>
                                 <FormLabel>Label</FormLabel>
                                 <FormControl>
-                                    <Input disabled={loading} placeholder='Store name' {...field} />
+                                    <Input disabled={loading} 
+                                    placeholder='Store name' 
+                                    {...field} 
+                                    />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}
                     />
                 </div>
-                <Button disabled={loading} className="ml-auto" type='submit'>
+                <Button 
+                  disabled={loading} 
+                  className="ml-auto" 
+                  type='submit'
+                >
                     {action}
                 </Button>
             </form>
