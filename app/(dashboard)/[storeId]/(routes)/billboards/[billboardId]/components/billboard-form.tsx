@@ -63,7 +63,7 @@ const BillboardForm: React.FC<BillboarFormProps> = ({ initialData }) => {
             setLoading(true)
 
             if( initialData ){
-                await axios.patch(`/api/${params.storeId}/billboards/${params.billboardId}}`, data);
+                await axios.patch(`/api/${params.storeId}/billboards/${params.billboardId}`, data);
             }else{
                 await axios.post(`/api/${params.storeId}/billboards`, data); 
             }
