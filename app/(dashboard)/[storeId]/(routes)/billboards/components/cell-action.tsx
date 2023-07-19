@@ -1,5 +1,7 @@
 'use client'
 
+import { useState } from 'react';
+import axios from "axios"
 import { 
     Copy, 
     Edit, 
@@ -19,6 +21,7 @@ import {
 import { Button } from '@/components/ui/button'
 
 import { BillboardColumn } from "./columns"
+import { AlertModal } from '@/components/modals/alret-modal';
 
 interface CellActionsProps {
     data: BillboardColumn
@@ -28,13 +31,39 @@ export const CellActions: React.FC<CellActionsProps> = ({data}) =>{
 
     const router = useRouter()
     const params = useParams()
+    const [loading, setLoading] = useState(false)
+    const [open, setOpen] = useState(false)
 
     const onCopy = ( id: string) => {
         navigator.clipboard.writeText(id)
         toast.success("Id Copied")
     }
 
+    const onDelete = async () =>{
+        try {
+
+            setLoading(true)
+            await axios.delete(`/api/${params.storeId}/billboards/${data.id}`)
+            router.refresh()
+            toast.success("Billboard deleted")
+
+        } catch (error) {
+            toast.error("Make sure you all categories using this billboard first")
+
+        }finally{
+            setLoading(false)
+            setOpen(false)
+        }
+    }
+
     return(
+        <>
+        <AlertModal
+            isOpen={open}
+            onClose={()=> setOpen(false)}
+            onConfirm={onDelete}
+            loading={loading}
+        />
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="h-8 w-8 p-0">
@@ -54,11 +83,12 @@ export const CellActions: React.FC<CellActionsProps> = ({data}) =>{
                     <Edit className="mr-2 h-4 w-4" />
                     Update
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={()=> setOpen(true)}>
                     <Trash className="mr-2 h-4 w-4" />
                     Delete
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
+        </>
     )
 }
