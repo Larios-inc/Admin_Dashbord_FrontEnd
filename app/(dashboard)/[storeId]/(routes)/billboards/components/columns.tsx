@@ -7,7 +7,7 @@ import { CellActions } from "./cell-action"
 // You can use a Zod schema here if you want.
 export type BillboardColumn = {
   id: string
-  label: number
+  label: string
   createAt: string
 }
 
