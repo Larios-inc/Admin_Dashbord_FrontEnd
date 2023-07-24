@@ -63,12 +63,12 @@ export const SizeForm: React.FC<SizeFormProps> = ({ initialData }) => {
             setLoading(true)
 
             if( initialData ){
-                await axios.patch(`/api/${params.storeId}/billboards/${params.billboardId}`, data);
+                await axios.patch(`/api/${params.storeId}/sizes/${params.sizeId}`, data);
             }else{
-                await axios.post(`/api/${params.storeId}/billboards`, data); 
+                await axios.post(`/api/${params.storeId}/sizes`, data); 
             }
             router.refresh()
-            router.push(`/${params.storeId}/billboards`)
+            router.push(`/${params.storeId}/sizes`)
             toast.success(toastMessage)
             
         } catch (error) {
@@ -83,10 +83,10 @@ export const SizeForm: React.FC<SizeFormProps> = ({ initialData }) => {
         try {
 
             setLoading(true)
-            await axios.delete(`/api/${params.storeId}/billboards/${params.billboardId}`)
+            await axios.delete(`/api/${params.storeId}/sizes/${params.sizeId}`)
             router.refresh()
-            router.push(`/${params.storeId}/billboards`)
-            toast.success("Billboard deleted")
+            router.push(`/${params.storeId}/sizes`)
+            toast.success("Size deleted")
 
         } catch (error) {
             toast.error("Make sure you all categories using this billboard first")
@@ -150,7 +150,7 @@ export const SizeForm: React.FC<SizeFormProps> = ({ initialData }) => {
                                 <FormLabel>Value</FormLabel>
                                 <FormControl>
                                     <Input disabled={loading} 
-                                    placeholder='Value name' 
+                                    placeholder='Size value' 
                                     {...field} 
                                     />
                                 </FormControl>
