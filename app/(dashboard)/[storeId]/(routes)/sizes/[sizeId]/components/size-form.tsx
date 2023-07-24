@@ -89,7 +89,7 @@ export const SizeForm: React.FC<SizeFormProps> = ({ initialData }) => {
             toast.success("Size deleted")
 
         } catch (error) {
-            toast.error("Make sure you all categories using this billboard first")
+            toast.error("Make sure you removed all products using this size first")
 
         }finally{
             setLoading(false)
