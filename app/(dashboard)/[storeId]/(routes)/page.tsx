@@ -71,7 +71,7 @@ const DashboardPage: React.FC<DashboardPageProps> = async({
                 </div>
                 <Card className="col-span-4">
                     <CardHeader>
-                        <CardTitle>Overvie</CardTitle>
+                        <CardTitle>Overview</CardTitle>
                     </CardHeader>
                     <CardContent className="pl-2">
                         <Overview data={graphRevenue} />
